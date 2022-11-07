@@ -1,0 +1,105 @@
+<div style="width: 30%; margin-left: 50px;">
+  <div><h3>{{ message }}</h3></div>
+
+  <form [formGroup]="registerForm" (submit)="doRegister()">
+    <div class="form-outline mb-4">
+      <input type="text" id="userName" class="form-control" formControlName="userName" [class.is-invalid] = "userName?.invalid"/>
+      <label class="form-label" for="userName">Введите имя</label>
+
+      <div *ngIf="userName?.invalid && (userName?.dirty || userName?.touched)" class="alert alert-danger">
+        <div *ngIf="userName?.errors?.['minlength']">
+          Имя должено быть не менее 2 символов
+        </div>
+        <div *ngIf="userName?.errors?.['maxlength']">
+          Имя должено быть не более 30 символов
+        </div>
+      </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="text" id="surname" class="form-control" formControlName="surname" [class.is-invalid] = "surname?.invalid"/>
+      <label class="form-label" for="surname">Введите фамилию</label>
+
+      <div *ngIf="surname?.invalid && (surname?.dirty || surname?.touched)" class="alert alert-danger">
+        <div *ngIf="surname?.errors?.['minlength']">
+          Фамилия должена быть не менее 2 символов
+        </div>
+        <div *ngIf="surname?.errors?.['maxlength']">
+          Фамилия должена быть не более 30 символов
+        </div>
+      </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="text" id="patronymic" class="form-control" formControlName="patronymic" [class.is-invalid] = "patronymic?.invalid"/>
+      <label class="form-label" for="patronymic">Введите отчество</label>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="email" id="email" class="form-control" formControlName="email" [class.is-invalid] = "email?.invalid" />
+      <label class="form-label" for="email">Введите e-mail адрес</label>
+
+      <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+        <div *ngIf="email?.errors">
+          Введите валидный e-mail адрес
+        </div>
+      </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="password" id="pass1" class="form-control" formControlName="pass1" [class.is-invalid] = "pass1?.invalid && (pass1?.dirty || pass1?.touched)" />
+      <label class="form-label" for="pass1">Введите пароль</label>
+
+      <div *ngIf="pass1?.invalid && (pass1?.dirty || pass1?.touched)" class="alert alert-danger">
+        <div *ngIf="pass1?.errors?.['minlength']">
+          Пароль должен быть не менее 6 символов
+        </div>
+        <div *ngIf="pass1?.errors?.['maxlength']">
+          Пароль должен быть не более 30 символов
+        </div>
+        <div *ngIf="pass1?.errors?.['missmatch']">
+          Оба пароля должны совпадать
+        </div>
+      </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="password" id="pass2" class="form-control" formControlName="pass2" [class.is-invalid] = "pass1?.invalid && (pass1?.dirty || pass1?.touched)" />
+      <label class="form-label" for="pass2">Введите пароль ещё раз</label>
+
+      <div *ngIf="pass2?.invalid && (pass2?.dirty || pass2?.touched)" class="alert alert-danger">
+        <div *ngIf="pass2?.errors?.['minlength']">
+          Пароль должен быть не менее 6 символов
+        </div>
+        <div *ngIf="pass2?.errors?.['maxlength']">
+          Пароль должен быть не более 30 символов
+        </div>
+        <div *ngIf="pass2?.errors?.['missmatch']">
+          Оба пароля должны совпадать
+        </div>
+      </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <input type="date" id="birthday" class="form-control" formControlName="birthday" [class.is-invalid] = "birthday?.invalid" />
+      <label class="form-label" for="birthday">Введите дату рождения</label>
+
+      <div *ngIf="birthday?.invalid && (birthday?.dirty || birthday?.touched)" class="alert alert-danger">
+        <div *ngIf="birthday?.errors?.['notInRange']">
+          Дата рождения должна быть в диапазоне: 01.01.1950 - 01.01.2021
+        </div>
+      </div>
+    </div>
+
+    <div class="form-outline mb-4">
+      <select id="gender" formControlName="gender" class="form-control">
+        <option value="male" selected default>МУЖ</option>
+        <option value="female">ЖЕН</option>
+      </select>
+      <label class="form-label" for="gender">Выберите пол</label>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-block mb-4" (click)="doRegister()">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+
+  </form>
+<div>

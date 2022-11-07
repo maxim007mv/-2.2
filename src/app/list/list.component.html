@@ -1,0 +1,33 @@
+<div style="width: 30%; margin-left: 50px;">
+<div style="margin-left: 50px;">
+  <form [formGroup]="itemForm" (submit)="addItem()">
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="text" id="itemName" class="form-control" formControlName="itemName" [class.is-invalid] = "itemName?.invalid" />
+      <label class="form-label" for="itemName">Добавить новый товар</label>
+
+      <div *ngIf="itemName?.invalid && (itemName?.dirty || itemName?.touched)" class="alert alert-danger">
+        <div *ngIf="itemName?.errors?.['minlength']">
+          Название должено быть не менее 3 символов
+        </div>
+        <div *ngIf="itemName?.errors?.['maxlength']">
+          Название должено быть не более 50 символов
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="itemForm.invalid">КУПИТЬ</button>
+  </form>
+</div>
+
+<div style="margin-left: 50px;">
+  <h4>Список покупок:</h4>
+
+  <table width="100%">
+    <tr><th width="60%">Товар</th><th width="20%">Дата</th><th width="20%"></th>
+    <tr *ngFor="let p of purchaseList; let i = index" >
+      <td>{{ p.name }}</td><td>Дата: {{ p.date | date:'mediumDate' }}</td><td><button (click)="deleteItem(i)" style="padding: 2px;">Удалить</button></td>
+    </tr>
+  </table>
+</div>
+</div>

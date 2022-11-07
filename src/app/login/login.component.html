@@ -1,0 +1,37 @@
+<div style="width: 30%; margin-left: 50px;">
+  <div><h3>{{ message }}</h3></div>
+
+  <form [formGroup]="loginForm" (submit)="doLogin()">
+
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="email" id="login" class="form-control" formControlName="login" [class.is-invalid] = "login?.invalid" />
+      <label class="form-label" for="login">Введите e-mail адрес</label>
+
+      <div *ngIf="login?.invalid && (login?.dirty || login?.touched)" class="alert alert-danger">
+        <div *ngIf="login?.errors">
+          Введите валидный e-mail адрес
+        </div>
+      </div>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" id="pass" class="form-control" formControlName="pass" [class.is-invalid] = "pass?.invalid"/>
+      <label class="form-label" for="pass">Введите пароль</label>
+
+      <div *ngIf="pass?.invalid && (pass?.dirty || pass?.touched)" class="alert alert-danger">
+        <div *ngIf="pass?.errors?.['minlength']">
+          Пароль должен быть не менее 6 символов
+        </div>
+        <div *ngIf="pass?.errors?.['maxlength']">
+          Пароль должен быть не более 30 символов
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="loginForm.invalid" >ВОЙТИ</button>
+
+  </form>
+<div>
+
